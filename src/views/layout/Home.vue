@@ -1,87 +1,27 @@
 <template>
   <div class="home-container">
     <div class="nav-list">
-      <a-menu
-        :default-selected-keys="['1']"
-        :default-open-keys="['sub1']"
-        mode="inline"
-        theme="dark"
-        :inline-collapsed="collapsed"
-      >
-        <a-menu-item key="1">
-          <a-icon type="pie-chart" />
-          <span>Option 1</span>
-        </a-menu-item>
-        <a-menu-item key="2">
-          <a-icon type="desktop" />
-          <span>Option 2</span>
-        </a-menu-item>
-        <a-menu-item key="3">
-          <a-icon type="inbox" />
-          <span>Option 3</span>
-        </a-menu-item>
-        <a-sub-menu key="sub1">
-          <span slot="title"
-            ><a-icon type="mail" /><span>Navigation One</span></span
-          >
-          <a-menu-item key="5"> Option 5 </a-menu-item>
-          <a-menu-item key="6"> Option 6 </a-menu-item>
-          <a-menu-item key="7"> Option 7 </a-menu-item>
-          <a-menu-item key="8"> Option 8 </a-menu-item>
-        </a-sub-menu>
-        <a-sub-menu key="sub2">
-          <span slot="title"
-            ><a-icon type="appstore" /><span>Navigation Two</span></span
-          >
-          <a-menu-item key="9"> Option 9 </a-menu-item>
-          <a-menu-item key="10"> Option 10 </a-menu-item>
-          <a-sub-menu key="sub3" title="Submenu">
-            <a-menu-item key="11"> Option 11 </a-menu-item>
-            <a-menu-item key="12"> Option 12 </a-menu-item>
-          </a-sub-menu>
-        </a-sub-menu>
-      </a-menu>
+      <Nav />
     </div>
-    <div class="main-header" :class="{ 'menu-unfold': collapsed }">
-      <div class="menu-list">
-        <a-button
-          type="primary"
-          style="margin-bottom: 16px"
-          @click="toggleCollapsed"
-        >
-          <a-icon :type="collapsed ? 'menu-unfold' : 'menu-fold'" />
-        </a-button>
-        <a-breadcrumb>
-          <a-breadcrumb-item>Home</a-breadcrumb-item>
-          <a-breadcrumb-item
-            ><a href="">Application Center</a></a-breadcrumb-item
-          >
-        </a-breadcrumb>
-      </div>
-      <div class="user-info">
-        <ul>
-          <li class="info">
-            欢迎, yanghuanlei
-            <a-icon type="down" />
-          </li>
-          <li class="button">退出</li>
-        </ul>
-      </div>
+    <div class="main-header" :class="{ 'menu-unfold': $store.state.collapsed }">
+      <Header />
     </div>
   </div>
 </template>
 
 <script>
+import Nav from "./components/Nav.vue";
+import Header from "./components/Header.vue";
+
 export default {
+  components: {
+    Nav,
+    Header,
+  },
   data() {
     return {
-      collapsed: false,
+      collapsed: this.$store.state.collapsed,
     };
-  },
-  methods: {
-    toggleCollapsed() {
-      this.collapsed = !this.collapsed;
-    },
   },
 };
 </script>
