@@ -1,0 +1,67 @@
+.home-container {
+    .nav-list {
+        width: 180px;
+        position: fixed;
+        height: 100%;
+
+        .ant-menu {
+            height: 100%;
+        }
+    }
+
+    .main-header {
+        height: 50px;
+        line-height: 50px;
+        margin-left: 180px;
+        transition: all 0.3s;
+        border: 1px solid #eee;
+        padding: 0 0 0 10px ;
+        &.menu-unfold {
+            margin-left: 80px;
+        }
+
+        .menu-list {
+            float: left;
+
+            .ant-breadcrumb {
+                margin-left: 20px;
+                display: inline-block;
+            }
+        }
+
+        .user-info {
+            margin-right: 40px;
+            float: right;
+            text-align: center;
+            padding: 0 60px;
+
+            .info,
+            .button {
+                cursor: pointer;
+            }
+
+            .info {
+                &:hover {
+                    color: #f00;
+                }
+            }
+            li {
+                padding: 0 30px;
+            }
+            li:not(:first-child) {
+                display: none;
+                &:hover {
+                    background: #eee;
+                    color: cornflowerblue;
+                    font-weight: bold;
+                }
+            }
+
+            &:hover {
+                li {
+                    display: block;
+                }
+            }
+        }
+    }
+}
