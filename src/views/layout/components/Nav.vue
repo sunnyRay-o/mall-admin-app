@@ -49,9 +49,6 @@ export default {
     return {
     };
   },
-  created() {
-    console.log("state:", this.$store.state);
-  },
 };
 </script>
 
