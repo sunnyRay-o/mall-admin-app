@@ -1,23 +1,47 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
+import {
+  setUserCookie,
+  getUserCookie,
+  removeUserCookie,
+} from "@/utils/userCookie";
+import collapsed from "./collapsed";
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
+  modules: {
+    collapsed,
+  },
   state: {
-    // 左侧导航栏的闭合状态，false表示不闭合，true表示闭合
-    collapsed: false,
+    // 用户的登录信息
+    userInfo: getUserCookie(),
   },
   mutations: {
-    changeCollapsed(state) {
-      state.collapsed = !state.collapsed;
+    // 改变用户的登录信息
+    setUserInfo(state, userInfo) {
+      state.userInfo = userInfo;
+    },
+    // 登出
+    logout(state) {
+      state.userInfo = {
+        username: "",
+        email: "",
+        appkey: "",
+        role: "",
+      };
     },
   },
   actions: {
-    asyncChangeCollapsed(ctx) {
-      ctx.commit("changeCollapsed");
+    // 提交一个mutation，异步改变用户的登录信息
+    asyncSetUserInfo({ commit }, userInfo) {
+      commit("setUserInfo", userInfo);
+      setUserCookie(userInfo);
     },
-  },
-  modules: {
+    // 提交一个mutation，异步的登出当前用户
+    asyncLogout({ commit }) {
+      commit("logout");
+      removeUserCookie();
+    },
   },
 });

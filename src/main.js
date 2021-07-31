@@ -1,3 +1,7 @@
+// // 测试cookie
+// import Cookie from "js-cookie";
+// window.myCookie = Cookie;
+
 import Vue from 'vue';
 import App from './App.vue';
 import router from './router';

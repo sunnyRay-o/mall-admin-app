@@ -6,7 +6,7 @@
         style="margin-bottom: 16px"
         @click="toggleCollapsed"
       >
-        <a-icon :type="collapsed ? 'menu-unfold' : 'menu-fold'" />
+        <a-icon :type="$store.state.collapsed.collapsed ? 'menu-unfold' : 'menu-fold'" />
       </a-button>
       <a-breadcrumb>
         <a-breadcrumb-item>Home</a-breadcrumb-item>
@@ -16,10 +16,10 @@
     <div class="user-info">
       <ul>
         <li class="info">
-          欢迎, yanghuanlei
+          {{$store.state.userInfo.username}}
           <a-icon type="down" />
         </li>
-        <li class="button">退出</li>
+        <li class="button" @click="logout">退出</li>
       </ul>
     </div>
   </div>
@@ -29,13 +29,18 @@
 export default {
   data() {
     return {
-      collapsed: this.$store.state.collapsed,
     };
   },
   methods: {
     toggleCollapsed() {
-      this.$store.dispatch("asyncChangeCollapsed");
-      console.log(this.$store.state.collapsed);
+      this.$store.dispatch("collapsed/asyncChangeCollapsed");
+      console.log(this.$store.state.collapsed.collapsed);
+    },
+    logout() {
+      this.$store.dispatch("asyncLogout");
+      this.$router.replace({
+        name: "Login",
+      });
     },
   },
 };

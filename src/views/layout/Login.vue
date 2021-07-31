@@ -18,10 +18,10 @@
       </a-form-model-item>
       <a-form-model-item :wrapper-col="{ span: 14, offset: 4 }">
         <a-button type="primary" @click="submitForm('loginForm')">
-          Submit
+          登录
         </a-button>
         <a-button style="margin-left: 10px" @click="resetForm('loginForm')">
-          Reset
+          重置
         </a-button>
       </a-form-model-item>
     </a-form-model>
@@ -33,7 +33,7 @@ import user from "@/api/user";
 
 export default {
   data() {
-    const emailReg = /^[\w-]+@[\w.-]+.com$/;
+    const emailReg = /^[\w-]+@[\w]+(\.com|\.cn)(\.[a-z]+)?$/;
     const checkEmail = (rule, value, callback) => {
       if (!value) {
         // 邮箱为空
@@ -72,7 +72,7 @@ export default {
       return this.$refs[formName].validate((valid) => {
         if (valid) {
           user.login(this.loginForm).then((res) => {
-            console.log(res);
+            this.$store.dispatch("asyncSetUserInfo", res);
             this.$router.push({
               name: "Home",
             });

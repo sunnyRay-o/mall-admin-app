@@ -3,7 +3,7 @@
     <div class="nav-list">
       <Nav />
     </div>
-    <div class="main-header" :class="{ 'menu-unfold': $store.state.collapsed }">
+    <div class="main-header" :class="{ 'menu-unfold': $store.state.collapsed.collapsed }">
       <Header />
     </div>
   </div>
