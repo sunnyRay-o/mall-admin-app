@@ -52,9 +52,6 @@ export default {
       });
     },
   },
-  created() {
-    console.log(this.$router.currentRoute);
-  },
   watch: {
     $route: {
       handler() {

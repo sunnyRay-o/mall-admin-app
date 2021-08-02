@@ -1,15 +1,31 @@
 <template>
   <div class="product-list-container">
-      商品列表
+    <!-- 搜索框 -->
+    <div class="search-box">
+      <SearchBox  @searchSubmit="handleSubmit"/>
+    </div>
+    <!-- 表格 -->
+    <div class="table"></div>
   </div>
 </template>
 
 <script>
-export default {
+import SearchBox from "@/components/SearchBox.vue";
 
+export default {
+  components: {
+    SearchBox,
+  },
+  methods: {
+    handleSubmit(params) {
+      console.log("###:", params);
+    },
+  },
 };
 </script>
 
-<style>
-
+<style scoped lang="less">
+.product-list-container {
+  margin-top: 50px;
+}
 </style>

@@ -1,11 +1,22 @@
 import axios from "axios";
+import store from "@/store";
 
 const ins = axios.create({
   baseURL: "https://mallapi.duyiedu.com/",
-});// axios实例
+}); // axios实例
 ins.interceptors.request.use((config) => {
   console.log(config);
-  return config;
+  const reg = /^\/passport[\s\S]*$/gi;
+  if (reg.test(config.url)) {
+    return config;
+  }
+  return {
+    ...config,
+    params: {
+      ...config.params,
+      appkey: store.state.userInfo.appkey,
+    },
+  };
 }, (error) => {
   console.log(error);
   return Promise.reject(error);
