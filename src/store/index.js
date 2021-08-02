@@ -6,12 +6,14 @@ import {
   removeUserCookie,
 } from "@/utils/userCookie";
 import collapsed from "./collapsed";
+import menuRoute from "./menuRoute";
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
   modules: {
     collapsed,
+    menuRoute,
   },
   state: {
     // 用户的登录信息
