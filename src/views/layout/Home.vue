@@ -8,8 +8,8 @@
       :class="{ 'menu-unfold': $store.state.collapsed.collapsed }"
     >
       <Header />
+      <router-view></router-view>
     </div>
-    <router-view></router-view>
   </div>
 </template>
 

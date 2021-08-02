@@ -65,6 +65,9 @@ const routes = [{
     hidden: false,
     icon: "home",
   },
+  redirect: {
+    name: "Index",
+  },
   children: [{
     path: "index",
     name: "Index",

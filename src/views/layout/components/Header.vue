@@ -6,17 +6,25 @@
         style="margin-bottom: 16px"
         @click="toggleCollapsed"
       >
-        <a-icon :type="$store.state.collapsed.collapsed ? 'menu-unfold' : 'menu-fold'" />
+        <a-icon
+          :type="$store.state.collapsed.collapsed ? 'menu-unfold' : 'menu-fold'"
+        />
       </a-button>
       <a-breadcrumb>
-        <a-breadcrumb-item>Home</a-breadcrumb-item>
-        <a-breadcrumb-item><a href="">Application Center</a></a-breadcrumb-item>
+        <a-breadcrumb-item>{{
+          currentRoute[0] ? currentRoute[0].meta.title : ""
+        }}</a-breadcrumb-item>
+        <a-breadcrumb-item
+          ><router-link :to="{ name: currentRoute[1].name }">{{
+            currentRoute[1] ? currentRoute[1].meta.title : ""
+          }}</router-link>
+        </a-breadcrumb-item>
       </a-breadcrumb>
     </div>
     <div class="user-info">
       <ul>
         <li class="info">
-          {{$store.state.userInfo.username}}
+          {{ $store.state.userInfo.username }}
           <a-icon type="down" />
         </li>
         <li class="button" @click="logout">退出</li>
@@ -29,6 +37,7 @@
 export default {
   data() {
     return {
+      currentRoute: this.$router.currentRoute.matched,
     };
   },
   methods: {
@@ -41,6 +50,17 @@ export default {
       this.$router.replace({
         name: "Login",
       });
+    },
+  },
+  created() {
+    console.log(this.$router.currentRoute);
+  },
+  watch: {
+    $route: {
+      handler() {
+        // console.log(newValue, oldValue);
+        this.currentRoute = this.$router.currentRoute.matched;
+      },
     },
   },
 };
