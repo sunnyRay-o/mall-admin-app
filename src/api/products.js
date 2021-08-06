@@ -5,4 +5,9 @@ export default {
   getCategoryList() {
     return axios.get("/category/all");
   },
+  getTableData(params) {
+    return axios.get("/products/all", {
+      params,
+    });
+  },
 };

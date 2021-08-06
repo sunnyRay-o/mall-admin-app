@@ -5,7 +5,6 @@ const ins = axios.create({
   baseURL: "https://mallapi.duyiedu.com/",
 }); // axios实例
 ins.interceptors.request.use((config) => {
-  console.log(config);
   const reg = /^\/passport[\s\S]*$/gi;
   if (reg.test(config.url)) {
     return config;
@@ -17,12 +16,8 @@ ins.interceptors.request.use((config) => {
       appkey: store.state.userInfo.appkey,
     },
   };
-}, (error) => {
-  console.log(error);
-  return Promise.reject(error);
-});
+}, (error) => Promise.reject(error));
 ins.interceptors.response.use((response) => {
-  console.log(response);
   if (response.data.status === "fail") {
     // 登录失败
     return Promise.reject(response.data.msg);

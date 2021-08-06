@@ -36,7 +36,6 @@
   </div>
 </template>
 <script>
-import products from "@/api/products";
 
 export default {
   data() {
@@ -45,22 +44,14 @@ export default {
         searchWord: "",
         category: "",
       },
-      categoryList: [], // 商品类目
     };
   },
-  async created() {
-    const resp = await products.getCategoryList();
-    console.log("----:", resp);
-    this.categoryList = resp.data;
-    console.log("===", this.categoryList);
-  },
+  props: ["categoryList"],
   methods: {
     handleSubmit() {
       this.$emit("searchSubmit", this.searchForm);
     },
-    handleChange(e) {
-      console.log(e);
-    },
+    handleChange() {},
   },
 };
 </script>
