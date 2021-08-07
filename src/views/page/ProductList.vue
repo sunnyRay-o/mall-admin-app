@@ -4,12 +4,22 @@
     <div class="search-box">
       <SearchBox @searchSubmit="handleSubmit" :categoryList="categoryList" />
     </div>
+    <a-button class="product-add"
+      ><router-link
+        :to="{
+          name: 'ProductAdd',
+        }"
+        >新增商品</router-link
+      ></a-button
+    >
     <!-- 表格 -->
     <div class="table">
       <ProductsTable
         :tableData="tableData"
         :page="pagination"
         @changePage="handleChangePage"
+        @edit="handleEditProduct"
+        @remove="handleRemoveProduct"
       />
     </div>
   </div>
@@ -69,6 +79,31 @@ export default {
       this.pagination = page;
       this.getData();
     },
+    handleEditProduct(record) {
+      this.$router.push({
+        name: "ProductEdit",
+        params: {
+          id: record.id,
+        },
+      });
+    },
+    handleRemoveProduct(record) {
+      const This = this;
+      this.$confirm({
+        title: "确认删除",
+        content: `您确定删除标题：${record.title}的商品么？`,
+        cancelText: "取消",
+        okText: "确定",
+        async onOk() {
+          const resp = await products.deleteProduct({
+            id: record.id,
+          });
+          console.log(resp);
+          This.getData();
+        },
+        onCancel() {},
+      });
+    },
   },
 };
 </script>
@@ -76,5 +111,11 @@ export default {
 <style scoped lang="less">
 .product-list-container {
   margin-top: 50px;
+  position: relative;
+  .product-add {
+    position: absolute;
+    right: 14px;
+    top: 14px;
+  }
 }
 </style>

@@ -1,7 +1,7 @@
 <template>
   <div class="home-container">
     <div class="nav-list">
-      <Nav />
+      <Nav :key="key"/>
     </div>
     <div
       class="main-header"
@@ -25,7 +25,13 @@ export default {
   data() {
     return {
       collapsed: this.$store.state.collapsed,
+      key: new Date().getTime(),
     };
+  },
+  watch: {
+    $route() {
+      this.key = new Date().getTime();
+    },
   },
 };
 </script>

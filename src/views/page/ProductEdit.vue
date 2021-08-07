@@ -1,6 +1,6 @@
 <template>
-  <div class="product-add-container">
-      <h1>添加商品</h1>
+  <div class="product-edit-container">
+      <h1>编辑商品</h1>
   </div>
 </template>
 
@@ -11,7 +11,7 @@ export default {
 </script>
 
 <style scoped lang="less">
-.product-add-container {
+.product-edit-container {
   margin-top: 50px;
 }
 

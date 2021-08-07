@@ -5,13 +5,14 @@
     :pagination="page"
     @change="handleChange"
   >
-    <div slot="operation">
-      <a-button>编辑</a-button>
-      <a-button>删除</a-button>
+    <div slot="operation" slot-scope="text, record">
+      <a-button @click="handleEdit(text, record)">编辑</a-button>
+      <a-button @click="handleRemove(text, record)">删除</a-button>
     </div>
   </a-table>
 </template>
 <script>
+
 const columns = [
   {
     title: "ID",
@@ -60,6 +61,7 @@ const columns = [
   {
     title: "操作",
     dataIndex: "operation",
+    width: 200,
     scopedSlots: { customRender: "operation" },
   },
 ];
@@ -81,6 +83,12 @@ export default {
   methods: {
     handleChange(page) {
       this.$emit("changePage", page);
+    },
+    handleEdit(text, record) {
+      this.$emit("edit", record);
+    },
+    handleRemove(text, record) {
+      this.$emit("remove", record);
     },
   },
 };

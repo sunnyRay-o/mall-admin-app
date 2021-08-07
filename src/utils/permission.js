@@ -11,6 +11,9 @@ const roleToRoute = {
   {
     name: "Product",
   },
+  {
+    name: "ProductEdit",
+  },
   ],
   admin: [{
     name: "ProductList",
@@ -23,6 +26,9 @@ const roleToRoute = {
   },
   {
     name: "Category",
+  },
+  {
+    name: "ProductEdit",
   },
   ],
 };
@@ -38,7 +44,9 @@ export default function getMenuRoutes(role, routes) {
     // 判断，在allowRoutesName中找到的item.name留下
     const obj = item;
     if (allowRoutesName.indexOf(item.name) !== -1) {
-      const { children } = item;
+      const {
+        children,
+      } = item;
       obj.children = children.filter((r) => allowRoutesName.indexOf(r.name) !== -1);
       return true;
     }

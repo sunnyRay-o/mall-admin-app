@@ -49,6 +49,16 @@ const asyncRoutesMap = [{
     },
     component: () => import("../views/page/Category.vue"),
   },
+  {
+    path: "edit/:id",
+    name: "ProductEdit",
+    meta: {
+      title: "编辑商品",
+      hidden: true,
+      icon: "edit",
+    },
+    component: () => import("../views/page/ProductEdit.vue"),
+  },
   ],
 
 }];
@@ -101,7 +111,7 @@ router.beforeEach((to, from, next) => {
       .email && store.state.userInfo.role) {
       const menuRoutes = getMenuRoutes(store.state.userInfo.role, asyncRoutesMap);
       if (!isAddRoutes) {
-        const storeRoutes = routes.concat(menuRoutes).filter((item) => !item.meta.hidden);
+        const storeRoutes = routes.concat(menuRoutes);
         store.dispatch("menuRoute/asyncChangeMenuRoutes", storeRoutes).then(() => {
           router.addRoutes(menuRoutes);
           next();

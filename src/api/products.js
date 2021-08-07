@@ -10,4 +10,7 @@ export default {
       params,
     });
   },
+  deleteProduct(params) {
+    return axios.delete(`/products/${params.id}`);
+  },
 };
