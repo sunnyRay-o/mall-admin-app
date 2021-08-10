@@ -22,7 +22,7 @@
             {{ c.name }}
           </a-select-option>
         </a-select>
-        <a-select show-search placeholder="请选择商品子类别">
+        <a-select show-search placeholder="请选择商品子类别" v-model="form.c_item">
           <a-select-option
             v-for="subCategory in categoryItems"
             :key="subCategory"

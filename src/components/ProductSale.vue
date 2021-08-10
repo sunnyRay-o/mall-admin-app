@@ -80,6 +80,17 @@ export default {
       previewImage: "",
     };
   },
+  created() {
+    if (this.form.images.length > 0) {
+      // 当前产品有图片
+      this.fileList = this.form.images.map((item, index) => ({
+        uid: `-${index}`,
+        name: `image${index}.png`,
+        status: "done",
+        url: item,
+      }));
+    }
+  },
   props: ["form"],
   methods: {
     async handlePreview(file) {

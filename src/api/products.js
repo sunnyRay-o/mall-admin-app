@@ -19,4 +19,10 @@ export default {
   productAdd(params) {
     return axios.post("/products/add", params);
   },
+  productDetail(id) {
+    return axios.get(`/products/${id}`);
+  },
+  editProduct(params) {
+    return axios.put("/products/edit", params);
+  },
 };

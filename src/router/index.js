@@ -57,7 +57,7 @@ const asyncRoutesMap = [{
       hidden: true,
       icon: "edit",
     },
-    component: () => import("../views/page/ProductEdit.vue"),
+    component: () => import("../views/page/ProductAdd.vue"),
   },
   ],
 

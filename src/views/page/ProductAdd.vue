@@ -50,26 +50,40 @@ export default {
     ProductBasic,
     ProductSale,
   },
+  async created() {
+    if (this.$route.params.id) {
+      // 进入到了编辑页面
+      const resp = await productApi.productDetail(this.$route.params.id);
+      this.form = resp;
+    }
+  },
   methods: {
     async nextInfo(form) {
-      console.log(form);
       this.form = {
         ...this.form,
         form,
       };
       if (this.current === 1) {
-        const resp = await productApi.productAdd(this.form);
-        console.log(resp);
-        this.$message.success("恭喜,新增成功!");
-        this.$router.push({
-          name: "ProductList",
-        });
+        if (this.$route.params.id) {
+          // 当前为编辑页面
+          await productApi.editProduct(this.form);
+          this.$message.success("恭喜，编辑成功！");
+          this.$router.push({
+            name: "ProductList",
+          });
+        } else {
+          // 当前为新增页面
+          await productApi.productAdd(this.form);
+          this.$message.success("恭喜,新增成功!");
+          this.$router.push({
+            name: "ProductList",
+          });
+        }
       } else {
         this.current += 1;
       }
     },
     prevInfo(form) {
-      console.log(form);
       this.current -= 1;
       this.form = {
         ...this.form,
