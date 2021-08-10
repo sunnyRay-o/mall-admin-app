@@ -4,6 +4,7 @@ import store from "@/store/index";
 import getMenuRoutes from "@/utils/permission";
 import Home from '../views/layout/Home.vue';
 import Login from "../views/layout/Login.vue";
+import Logon from "../views/layout/Logon.vue";
 
 Vue.use(VueRouter);
 
@@ -98,6 +99,15 @@ const routes = [{
   },
   component: Login,
 },
+{
+  path: "/system/logon",
+  name: "Logon",
+  meta: {
+    title: "注册",
+    hidden: true,
+  },
+  component: Logon,
+},
 ];
 
 const router = new VueRouter({
@@ -124,5 +134,10 @@ router.beforeEach((to, from, next) => {
   }
   return next();
 });
+const originalPush = VueRouter.prototype.push;
+VueRouter.prototype.push = function push(location, onResolve, onReject) {
+  if (onResolve || onReject) return originalPush.call(this, location, onResolve, onReject);
+  return originalPush.call(this, location).catch((err) => err);
+};
 
 export default router;

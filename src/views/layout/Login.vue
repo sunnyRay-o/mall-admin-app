@@ -20,9 +20,7 @@
         <a-button type="primary" @click="submitForm('loginForm')">
           登录
         </a-button>
-        <a-button style="margin-left: 10px" @click="resetForm('loginForm')">
-          重置
-        </a-button>
+        <a-button style="margin-left: 10px" @click="LogonForm"> 注册 </a-button>
       </a-form-model-item>
     </a-form-model>
   </div>
@@ -71,22 +69,27 @@ export default {
     submitForm(formName) {
       return this.$refs[formName].validate((valid) => {
         if (valid) {
-          user.login(this.loginForm).then((res) => {
-            this.$store.dispatch("asyncSetUserInfo", res);
-            this.$router.push({
-              name: "Home",
+          user
+            .login(this.loginForm)
+            .then((res) => {
+              this.$store.dispatch("asyncSetUserInfo", res);
+              this.$router.push({
+                name: "Home",
+              });
+            })
+            .catch((error) => {
+              this.$message.error(error);
             });
-          }).catch((error) => {
-            this.$message.error(error);
-          });
           return true;
         }
         console.log("error submit!!");
         return false;
       });
     },
-    resetForm(formName) {
-      return this.$refs[formName].resetFields();
+    LogonForm() {
+      this.$router.push({
+        name: "Logon",
+      });
     },
   },
 };
