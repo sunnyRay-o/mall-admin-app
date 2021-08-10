@@ -65,7 +65,13 @@ export default {
 
 <style scoped lang="less">
 .user-info {
-  position: fixed;
-  right: 0;
+  position: relative;
+  box-sizing: border-box;
+  .button {
+    position: absolute;
+    z-index: 1024;
+    left: 50%;
+    transform: translateX(-50%);
+  }
 }
 </style>
