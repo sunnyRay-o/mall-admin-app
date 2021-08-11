@@ -46,6 +46,7 @@ export default {
     };
   },
   async created() {
+    console.log(this.$store.state.userInfo.role);
     const { data } = await products.getCategoryList();
     this.categoryList = data;
     data.forEach((item) => {

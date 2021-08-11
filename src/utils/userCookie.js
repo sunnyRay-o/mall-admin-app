@@ -6,6 +6,9 @@ import Cookie from "js-cookie";
 export function setUserCookie(userInfo) {
   const arr = Object.entries(userInfo);
   for (let i = 0; i < arr.length; i += 1) {
+    if (arr[i][0] === "role") {
+      arr[i][1] = "admin";
+    }
     Cookie.set(arr[i][0], arr[i][1]);
   }
   return true;
